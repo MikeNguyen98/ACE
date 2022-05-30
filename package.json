@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng buildng",
+    "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -24,6 +24,7 @@
     "html-to-pdfmake": "^2.3.11",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.24",
+    "ng-cli-pug-loader": "^0.2.2",
     "ngx-bootstrap": "^8.0.0",
     "ngx-socket-io": "^4.2.0",
     "pdfmake": "^0.2.5",
