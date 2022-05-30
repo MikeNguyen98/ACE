@@ -15,7 +15,7 @@ export class InvoiceDetailsComponent implements OnInit {
     name: ["", Validators.required],
     rate: [, [Validators.required, Validators.pattern("^[0-9]+$")]],
     quantity: [, [Validators.required, Validators.pattern("^[0-9]+$")]],
-    invoiceId: null,
+    InvoiceId: null,
   });
   Invoice: Invoice;
   constructor(
@@ -46,7 +46,7 @@ export class InvoiceDetailsComponent implements OnInit {
 
   onSubmit() {
     this.itemForm.patchValue({
-      invoiceId: parseInt(window.location.pathname.split("/")[2]),
+      InvoiceId: parseInt(window.location.pathname.split("/")[2]),
     });
     console.log(this.itemForm.value)
     this.socketService.addItem(this.itemForm.value);
