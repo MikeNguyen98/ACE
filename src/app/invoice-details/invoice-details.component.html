@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div>
+      <button class="btn btn-secondary btn-block" (click)="back()">Back</button>
+    </div>
+    <div class="col-md-6">
+      <div class="row justify-content-md-center border pt-3 pb-5">
+        <div class="col-md-11" id="">
+          <form
+            class="row py-3"
+            [formGroup]="itemForm"
+            (ngSubmit)="onSubmit()"
+            autocomplete="off"
+          >
+            <div class="col-md-4">
+              <label for="Item" class="form-label">Item</label>
+              <input
+                type="text"
+                class="form-control"
+                id="Item"
+                formControlName="name"
+                required
+              />
+            </div>
+            <div class="col-md-3">
+              <label for="rate" class="form-label d-block text-end">Rate</label>
+              <input
+                type="number"
+                class="form-control"
+                id="rate"
+                formControlName="rate"
+                required
+              />
+            </div>
+            <div class="col-md-3">
+              <label for="quantity" class="form-label d-block text-end"
+                >Quantity</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                id="quantity"
+                formControlName="quantity"
+                required
+              />
+            </div>
+            <div class="col-md-2">
+              <label class="form-label d-block"></label>
+              <button class="btn btn-secondary btn-block mt-4">Add</button>
+            </div>
+          </form>
+        </div>
+        <div
+          class="col-md-11 justify-content-md-center text-center"
+          id="pdfTable"
+          #pdfTable
+        >
+          <table class="table table-borderless">
+            <tr class="text-center thead">
+              <th colspan="2">Item</th>
+              <th colspan="1">Rate</th>
+              <th colspan="2">Quantity</th>
+              <th colspan="2">Amount</th>
+            </tr>
+            <tbody class="text-center border-x" *ngIf="Invoice.Items">
+              <tr *ngFor="let item of Invoice.Items" class="">
+                <td colspan="2" class="border-y">{{ item.name }}</td>
+                <td colspan="1" class="border-y">
+                  ${{ item.rate.toFixed(2) }}
+                </td>
+                <td colspan="2" class="border-y">{{ item.quantity }}</td>
+                <td colspan="2" class="border-y">
+                  ${{ (item.quantity * item.rate).toFixed(2) }}
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr *ngIf="Invoice.Items.length > 0">
+                <td colspan="5" class="text-end">Total Amount</td>
+                <td colspan="2" class="text-center border-y border-x">
+                  ${{ Invoice.amount }}
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <div class="col-md-11 text-end">
+          <button class="btn btn-success btn-block" (click)="downloadAsPDF()">
+            print
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
