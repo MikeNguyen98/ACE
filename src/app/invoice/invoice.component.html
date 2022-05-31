@@ -20,21 +20,21 @@
         <tr *ngFor="let invoice of invoices$; let i = index">
           <th>{{ i + 1 }}</th>
           <td>#{{ invoice.id }}</td>
-          <td>{{ invoice.amount }}$</td>
-          <td>{{ invoice.status }}</td>
+          <td>{{ invoice.amount | number: "1.2-2" }}$</td>
+          <td>{{ invoice.status == 1 ? "Pending" : "Done" }}</td>
           <td>
             <button
               class="btn btn-primary btn-sm me-2"
               (click)="btnEdit(invoice)"
               rel="edit"
-              [disabled]="invoice.status == 4 || invoice.status == 3"
+              [disabled]="invoice.status == 2"
             >
               Edit
             </button>
             <button
               class="btn btn-danger btn-sm"
               (click)="handleDelete(invoice)"
-              [disabled]="invoice.status == 4 || invoice.status == 3"
+              [disabled]="invoice.status == 2"
             >
               Delete
             </button>

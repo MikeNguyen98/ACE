@@ -34,7 +34,7 @@ export class InvoiceDetailsComponent implements OnInit {
     private socketService: SocketService,
     private location: Location,
     private fb: FormBuilder,
-    public datepipe: DatePipe
+    public datepipe: DatePipe,
   ) {}
 
   back(): void {

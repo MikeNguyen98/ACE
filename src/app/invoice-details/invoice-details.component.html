@@ -115,7 +115,7 @@
                 </td>
                 <td colspan="2" class="border-y">{{ item.quantity }}</td>
                 <td colspan="2" class="border-y">
-                  ${{ (item.quantity * item.rate).toFixed(2) }}
+                  ${{ (item.quantity * item.rate).toFixed(2) | number:'1.2-2'}}
                 </td>
               </tr>
             </tbody>
@@ -123,7 +123,7 @@
               <tr *ngIf="Invoice.Items.length > 0">
                 <td colspan="5" class="text-end">Total Amount</td>
                 <td colspan="2" class="text-center border-y border-x">
-                  ${{ Invoice.amount }}
+                  ${{ Invoice.amount | number:'1.2-2' }}
                 </td>
               </tr>
             </tfoot>
@@ -131,7 +131,7 @@
         </div>
         <div class="col-md-11 text-end">
           <button class="btn btn-success btn-block" (click)="downloadAsPDF()">
-            print
+            Print
           </button>
         </div>
       </div>

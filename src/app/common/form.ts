@@ -5,17 +5,20 @@ import autoTable from 'jspdf-autotable';
 const addFooters = (doc: any) => {
   const pageCount = doc.internal.getNumberOfPages();
 
-  doc.setFontSize(8);
+  doc.setFontSize(10);
   for (var i = 1; i <= pageCount; i++) {
     doc.setPage(i);
     doc.text(
       'ACE Contractors Group Pty. Ltd',
-      doc.internal.pageSize.width / 2,
+      doc.internal.pageSize.width / 8,
       287,
       {
-        align: 'right',
+        align: 'left',
       }
     );
+    doc.text('ABN 12 345 678 901', (doc.internal.pageSize.width / 4) * 3, 287, {
+      align: 'left',
+    });
   }
 };
 function form(data: item[]) {
@@ -73,12 +76,13 @@ function form(data: item[]) {
     theme: 'grid',
   });
   autoTable(doc, {
-    body: [
+    foot: [
       [
         {
           content: 'ACE Person',
           styles: {
             fontSize: 16,
+            fontStyle: 'normal',
           },
         },
       ],
@@ -92,8 +96,9 @@ function form(data: item[]) {
         },
       ],
     ],
-
+    rowPageBreak: 'auto',
     theme: 'plain',
+    showFoot: "lastPage",
   });
   addFooters(doc);
   doc.output('dataurlnewwindow');
