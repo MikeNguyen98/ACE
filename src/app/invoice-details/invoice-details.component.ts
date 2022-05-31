@@ -13,8 +13,8 @@ export class InvoiceDetailsComponent implements OnInit {
   @ViewChild("pdfTable") pdfTable!: ElementRef;
   itemForm = this.fb.group({
     name: ["", Validators.required],
-    rate: [, [Validators.required, Validators.pattern("^[0-9]+$")]],
-    quantity: [, [Validators.required, Validators.pattern("^[0-9]+$")]],
+    rate: [, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]],
+    quantity: [, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]],
     InvoiceId: null,
   });
   Invoice: Invoice;

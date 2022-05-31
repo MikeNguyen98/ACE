@@ -30,6 +30,7 @@
                 id="rate"
                 formControlName="rate"
                 required
+                min="0"
               />
             </div>
             <div class="col-md-3">
@@ -42,6 +43,8 @@
                 id="quantity"
                 formControlName="quantity"
                 required
+                min="0"
+                oninput="validity.valid||(value='');"
               />
             </div>
             <div class="col-md-2">
