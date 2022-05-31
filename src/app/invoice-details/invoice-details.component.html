@@ -20,7 +20,20 @@
                 id="Item"
                 formControlName="name"
                 required
+                required
               />
+              <div
+                *ngIf="
+                  itemForm.controls['name'].invalid &&
+                  (itemForm.controls['name'].dirty ||
+                    itemForm.controls['name'].touched)
+                "
+                class="alert-danger"
+              >
+                <div *ngIf="itemForm.controls['name'].errors?.['required']">
+                  Name is required.
+                </div>
+              </div>
             </div>
             <div class="col-md-3">
               <label for="rate" class="form-label d-block text-end">Rate</label>
@@ -30,8 +43,20 @@
                 id="rate"
                 formControlName="rate"
                 required
-                min="0"
+                min="0.00"
               />
+              <div
+                *ngIf="
+                  itemForm.controls['rate'].invalid &&
+                  (itemForm.controls['rate'].dirty ||
+                    itemForm.controls['rate'].touched)
+                "
+                class="alert-danger"
+              >
+                <div *ngIf="itemForm.controls['rate'].errors?.['required']">
+                  Rate is required.
+                </div>
+              </div>
             </div>
             <div class="col-md-3">
               <label for="quantity" class="form-label d-block text-end"
@@ -43,13 +68,30 @@
                 id="quantity"
                 formControlName="quantity"
                 required
-                min="0"
+                min="1"
                 oninput="validity.valid||(value='');"
               />
+              <div
+                *ngIf="
+                  itemForm.controls['quantity'].invalid &&
+                  (itemForm.controls['quantity'].dirty ||
+                    itemForm.controls['quantity'].touched)
+                "
+                class="alert-danger"
+              >
+                <div *ngIf="itemForm.controls['quantity'].errors?.['required']">
+                  Quantity is required.
+                </div>
+              </div>
             </div>
             <div class="col-md-2">
               <label class="form-label d-block"></label>
-              <button class="btn btn-secondary btn-block mt-4">Add</button>
+              <button
+                class="btn btn-secondary btn-block mt-4"
+                [disabled]="itemForm.status == 'INVALID'"
+              >
+                Add
+              </button>
             </div>
           </form>
         </div>

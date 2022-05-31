@@ -28,6 +28,9 @@ export class InvoiceComponent implements OnInit {
         this.router.navigateByUrl(`/invoice/${data.id}`)
       );
   }
+  btnEdit(invoice:Invoice) {
+    this.router.navigateByUrl(`/invoice/${invoice.id}`)
+  }
   handleDelete(invoice: Invoice): void {
     if (invoice.id) {
       this.socketService.deleteInvoice(invoice.id);

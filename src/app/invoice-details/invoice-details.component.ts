@@ -1,20 +1,32 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
-import { SocketService } from "src/app/services/socket.service";
-import { DatePipe, Location } from "@angular/common";
-import { FormBuilder, Validators } from "@angular/forms";
-import form from "../common/form";
-import { Invoice } from "../interface/invoice";
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { SocketService } from 'src/app/services/socket.service';
+import { DatePipe, Location } from '@angular/common';
+import { FormBuilder, Validators } from '@angular/forms';
+import form from '../common/form';
+import { Invoice } from '../interface/invoice';
 @Component({
-  selector: "app-invoice-details",
-  templateUrl: "./invoice-details.component.html",
-  styleUrls: ["./invoice-details.component.scss"],
+  selector: 'app-invoice-details',
+  templateUrl: './invoice-details.component.html',
+  styleUrls: ['./invoice-details.component.scss'],
 })
 export class InvoiceDetailsComponent implements OnInit {
-  @ViewChild("pdfTable") pdfTable!: ElementRef;
+  @ViewChild('pdfTable') pdfTable!: ElementRef;
   itemForm = this.fb.group({
-    name: ["", Validators.required],
-    rate: [, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]],
-    quantity: [, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]],
+    name: [null, [Validators.required]],
+    rate: [
+      null,
+      [
+        Validators.required,
+        Validators.pattern(/^[0-9]+\.{0,1}[0-9]*$/),
+      ],
+    ],
+    quantity: [
+      null,
+      [
+        Validators.required,
+        Validators.pattern(/^[1-9]+[0-9]*$/),
+      ],
+    ],
     InvoiceId: null,
   });
   Invoice: Invoice;
@@ -28,12 +40,9 @@ export class InvoiceDetailsComponent implements OnInit {
   back(): void {
     this.location.back();
   }
-  updateProfile() {
-    this.itemForm.patchValue({});
-  }
 
   ngOnInit(): void {
-    const id = window.location.pathname.split("/")[2];
+    const id = window.location.pathname.split('/')[2];
     this.socketService.findOne(parseInt(id));
     this.socketService
       .getNewInvocie()
@@ -46,10 +55,16 @@ export class InvoiceDetailsComponent implements OnInit {
 
   onSubmit() {
     this.itemForm.patchValue({
-      InvoiceId: parseInt(window.location.pathname.split("/")[2]),
+      InvoiceId: parseInt(window.location.pathname.split('/')[2]),
     });
-    console.log(this.itemForm.value)
-    this.socketService.addItem(this.itemForm.value);
-    this.itemForm.reset();
+
+    console.log(this.itemForm.status);
+
+    if (this.itemForm.status == 'INVALID') {
+      console.log(this.itemForm.value);
+    } else {
+      this.socketService.addItem(this.itemForm.value);
+      this.itemForm.reset();
+    }
   }
 }
