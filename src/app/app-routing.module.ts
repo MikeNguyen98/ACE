@@ -9,7 +9,7 @@ const routes: Routes = [
   {
     path: 'invoice/:id',
     component: InvoiceDetailsComponent,
-    data: { title: 'Edit Invoice' },
+    data: { title: 'Invoice details' },
   },
 ];
 
