@@ -5,7 +5,7 @@
     </div>
     <div class="col-md-6">
       <div class="row justify-content-md-center border pt-3 pb-5">
-        <div class="col-md-11" id="">
+        <div class="col-md-11" id="" [hidden]="Invoice.status == 2">
           <form
             class="row py-3"
             [formGroup]="itemForm"
