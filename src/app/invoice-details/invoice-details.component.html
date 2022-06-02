@@ -115,7 +115,9 @@
                 </td>
                 <td colspan="2" class="border-y">{{ item.quantity }}</td>
                 <td colspan="2" class="border-y">
-                  ${{ (item.quantity * item.rate).toFixed(2) | number:'1.2-2'}}
+                  ${{
+                    (item.quantity * item.rate).toFixed(2) | number: "1.2-2"
+                  }}
                 </td>
               </tr>
             </tbody>
@@ -123,15 +125,31 @@
               <tr *ngIf="Invoice.Items.length > 0">
                 <td colspan="5" class="text-end">Total Amount</td>
                 <td colspan="2" class="text-center border-y border-x">
-                  ${{ Invoice.amount | number:'1.2-2' }}
+                  ${{ Invoice.amount | number: "1.2-2" }}
                 </td>
               </tr>
             </tfoot>
           </table>
         </div>
         <div class="col-md-11 text-end">
-          <button class="btn btn-success btn-block" (click)="downloadAsPDF()">
-            Print
+          <button class="btn btn-success btn-block" [hidden]="Invoice.status==2" [disabled]="!(Invoice.Items.length >0)" (click)="onComplete()">
+            Done
+          </button>
+          &nbsp;
+          <button class="btn btn-primary btn-block" [disabled]="!(Invoice.Items.length >0)" (click)="downloadAsPDF()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-printer"
+              viewBox="0 0 16 16"
+            >
+              <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" />
+              <path
+                d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2H5zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1z"
+              /></svg
+            > Print
           </button>
         </div>
       </div>

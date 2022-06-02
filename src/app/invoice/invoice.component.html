@@ -23,21 +23,24 @@
           <td>{{ invoice.amount | number: "1.2-2" }}$</td>
           <td>{{ invoice.status == 1 ? "Pending" : "Done" }}</td>
           <td>
-            <button
-              class="btn btn-primary btn-sm me-2"
-              (click)="btnEdit(invoice)"
-              rel="edit"
-              [disabled]="invoice.status == 2"
-            >
-              Edit
-            </button>
-            <button
-              class="btn btn-danger btn-sm"
-              (click)="handleDelete(invoice)"
-              [disabled]="invoice.status == 2"
-            >
-              Delete
-            </button>
+            <div class="d-grid gap-2 d-md-block">
+              <button
+                class="btn btn-primary btn-sm me-2"
+                (click)="btnEdit(invoice)"
+                rel="edit"
+                type="button"
+              >
+                {{ invoice.status == 2 ? "View" : "Edit" }}
+              </button>
+              <button
+                class="btn btn-danger btn-sm"
+                (click)="handleDelete(invoice)"
+                [disabled]="invoice.status == 2"
+                type="button"
+              >
+                Delete
+              </button>
+            </div>
           </td>
         </tr>
       </tbody>

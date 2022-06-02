@@ -27,7 +27,7 @@ export class SocketService {
   }
 
   updateInvoice(invoice: Invoice) {
-    this.socket.emit("update", invoice);
+    this.socket.emit("complete", invoice);
   }
 
   deleteInvoice(id: number) {
@@ -50,5 +50,5 @@ export class SocketService {
     );;
   }
 
-  
+
 }

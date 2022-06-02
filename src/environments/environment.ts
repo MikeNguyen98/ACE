@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  socketUrl: 'https://ace-app-api.herokuapp.com',
+  socketUrl: 'http://localhost:8080',
 };
 
 /*

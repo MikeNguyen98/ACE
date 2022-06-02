@@ -15,17 +15,11 @@ export class InvoiceDetailsComponent implements OnInit {
     name: [null, [Validators.required]],
     rate: [
       null,
-      [
-        Validators.required,
-        Validators.pattern(/^[0-9]+\.{0,1}[0-9]*$/),
-      ],
+      [Validators.required, Validators.pattern(/^[0-9]+\.{0,1}[0-9]*$/)],
     ],
     quantity: [
       null,
-      [
-        Validators.required,
-        Validators.pattern(/^[1-9]+[0-9]*$/),
-      ],
+      [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)],
     ],
     InvoiceId: null,
   });
@@ -34,7 +28,7 @@ export class InvoiceDetailsComponent implements OnInit {
     private socketService: SocketService,
     private location: Location,
     private fb: FormBuilder,
-    public datepipe: DatePipe,
+    public datepipe: DatePipe
   ) {}
 
   back(): void {
@@ -51,6 +45,10 @@ export class InvoiceDetailsComponent implements OnInit {
 
   public async downloadAsPDF() {
     form(this.Invoice.Items);
+  }
+
+  onComplete() {
+    this.socketService.updateInvoice(this.Invoice);
   }
 
   onSubmit() {
